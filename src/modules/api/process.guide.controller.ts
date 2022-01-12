@@ -7,10 +7,13 @@ import ProcessGuideService from "../sevices/process.guide.service";
 const repository = new ProcessGuideRepository();
 const service = new ProcessGuideService(repository);
 
-export default class ProductController {
-  public async create(request: Request, response: Response): Promise<Response> {
+export default class ProcessGuideController {
+  public async getProcessGuide(
+    request: Request,
+    response: Response
+  ): Promise<Response> {
     try {
-      const { processType }: any = request.body;
+      const { processType }: any = request.params;
 
       const guide = await service.retrieveGuideByType(GuideType[processType]);
 
