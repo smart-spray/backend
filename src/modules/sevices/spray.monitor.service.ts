@@ -11,7 +11,7 @@ export default class SprayMonitorService {
     return SprayStatus.OK;
   }
 
-  public async retriveSprayData(): Promise<SprayMonitorEntity> {
+  protected async retriveSprayData(): Promise<SprayMonitorEntity> {
     const guide = new SprayMonitorEntity();
     return guide;
   }
