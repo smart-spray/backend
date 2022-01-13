@@ -16,7 +16,7 @@ export class BaseRepository<T> implements IRepository<T> {
   delete(id: string): Promise<boolean> {
     throw new Error("Method not implemented.");
   }
-  find(filter?: Partial<T>): Promise<T[]> {
+  findAll(filter?: Partial<T>): Promise<T[]> {
     throw new Error("Method not implemented.");
   }
   findById(id: string): Promise<T> {

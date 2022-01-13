@@ -1,5 +1,5 @@
 export class SprayEntity {
-  public id: string;
+  public id?: string;
   public date: Date;
   public duration: number;
   public weatherStatus: string;

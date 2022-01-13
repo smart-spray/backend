@@ -1,4 +1,4 @@
-import { GuideType } from "../entities/guide.type";
+import { GuideType } from "../entities/enums/guide.type";
 import { ProcessGuideEntity } from "../entities/process.guide.entity";
 import { IRepository } from "../repositories/repository";
 

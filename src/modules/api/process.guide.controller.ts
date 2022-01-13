@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import { GuideType } from "../entities/guide.type";
+import { GuideType } from "../entities/enums/guide.type";
 import ProcessGuideRepository from "../repositories/process.guide.repository";
 import ProcessGuideService from "../sevices/process.guide.service";
 
@@ -13,7 +13,7 @@ export default class ProcessGuideController {
     response: Response
   ): Promise<Response> {
     try {
-      const { processType }: any = request.params;
+      const { processType } = request.params;
 
       const guide = await service.retrieveGuideByType(GuideType[processType]);
 

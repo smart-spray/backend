@@ -1,5 +1,5 @@
-import { GuideType } from "./guide.type";
-import { ProcessStep } from "./process.step";
+import { GuideType } from "./enums/guide.type";
+import { ProcessStep } from "./process.step.entity";
 
 export class ProcessGuideEntity {
   public id: string;
