@@ -1,6 +1,6 @@
+import { IRepository } from "../../repositories/repository";
 import { GuideType } from "../entities/enums/guide.type";
 import { ProcessGuideEntity } from "../entities/process.guide.entity";
-import { IRepository } from "../repositories/repository";
 
 export default class ProcessGuideService {
   constructor(private repository: IRepository<ProcessGuideEntity>) {}

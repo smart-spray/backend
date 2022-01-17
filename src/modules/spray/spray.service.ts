@@ -1,5 +1,5 @@
+import { IRepository } from "../../repositories/repository";
 import { SprayEntity } from "../entities/spray.entity";
-import { IRepository } from "../repositories/repository";
 
 export default class SprayService {
   constructor(private repository: IRepository<SprayEntity>) {}

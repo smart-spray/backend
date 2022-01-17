@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 
+import SprayRepository from "../../repositories/spray.repository";
 import { SprayEntity } from "../entities/spray.entity";
-import SprayRepository from "../repositories/spray.repository";
-import SprayService from "../sevices/spray.service";
+import SprayService from "./spray.service";
 
 const repository = new SprayRepository();
 const service = new SprayService(repository);

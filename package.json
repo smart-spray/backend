@@ -18,6 +18,7 @@
     "print": "sls print"
   },
   "dependencies": {
+    "@azure/cosmos": "^3.15.0",
     "@types/aws-lambda": "^8.10.83",
     "@types/faker": "^5.5.8",
     "express": "^4.17.1",

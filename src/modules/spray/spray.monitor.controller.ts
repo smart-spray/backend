@@ -1,6 +1,6 @@
 import { Response } from "express";
 
-import SprayMonitorService from "../sevices/spray.monitor.service";
+import SprayMonitorService from "./spray.monitor.service";
 
 const service = new SprayMonitorService();
 

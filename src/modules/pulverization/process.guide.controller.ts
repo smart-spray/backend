@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 
+import ProcessGuideRepository from "../../repositories/process.guide.repository";
 import { GuideType } from "../entities/enums/guide.type";
-import ProcessGuideRepository from "../repositories/process.guide.repository";
-import ProcessGuideService from "../sevices/process.guide.service";
+import ProcessGuideService from "./process.guide.service";
 
 const repository = new ProcessGuideRepository();
 const service = new ProcessGuideService(repository);

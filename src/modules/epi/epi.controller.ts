@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 
+import EPIRepository from "../../repositories/epi.repository";
 import { GuideType } from "../entities/enums/guide.type";
-import EPIRepository from "../repositories/epi.repository";
-import EPIService from "../sevices/epi.service";
+import EPIService from "./epi.service";
 
 const repository = new EPIRepository();
 const service = new EPIService(repository);

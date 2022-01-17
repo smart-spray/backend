@@ -81,7 +81,12 @@
     "no-use-before-define": "off",
     "no-unused-expressions": ["error", { "allowTernary": true }],
 
-    "prettier/prettier": "error"
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
   },
   "ignorePatterns": [
     "node_modules",
