@@ -1,10 +1,10 @@
 import { CosmosService } from "../cosmosDB/cosmosService.js";
-import { SprayEntity } from "../modules/entities/spray.entity";
+import { PulverizationEntity } from "../modules/pulverization/pulverization.entity";
 import { BaseRepository } from "./baseRepository";
 
-export default class SprayRepository extends BaseRepository<SprayEntity> {
+export default class PulverizationRepository extends BaseRepository<PulverizationEntity> {
   constructor() {
-    super("SprayModel");
+    super("PulverizationModel");
   }
 
   public async readDatabase(): Promise<any[]> {
