@@ -1,8 +1,7 @@
 export class SprayEntity {
   public id?: string;
-  public date: Date;
-  public duration: number;
-  public weatherStatus: string;
-  public userName: string;
-  public sprayMachineStatus: string;
+  public ph: number;
+  public isClean: boolean;
+  public lastCleanDate: Date;
+  public nozzleStatus: string;
 }
