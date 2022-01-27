@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 
 import EPIRepository from "../../repositories/epi.repository";
-import { GuideType } from "../entities/enums/guide.type";
 import EPIService from "./epi.service";
 
 const repository = new EPIRepository();
@@ -12,7 +11,7 @@ export default class ProcessGuideController {
     try {
       const { processType } = request.params;
 
-      const epi = await service.retrieveEPIByType(GuideType[processType]);
+      const epi = await service.retrieveEPIByType(processType);
 
       return response.status(200).json(epi);
     } catch (err) {

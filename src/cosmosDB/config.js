@@ -1,14 +1,14 @@
 var config = {}
 
-config.endpoint = 'https://cosmos-smartspray.documents.azure.com:443/'
-config.key = 'n7QDH46EFpOwMwh5fsYgkO8t15dmbQxIOunvCwZWWVpeaMXk42uCkxXtpIdSn4EHwMNi1VhzIbN7p3ZWBt7OAw=='
+config.endpoint = 'https://cosmodb-ftt.documents.azure.com:443/'
+config.key = '7SOec0SAHtcWrr1iX0Ibcn61gHGB8ybESWjpeo91om6jS6Tvwy7hxibFtqp0gCha5qxUw00mOJh0PyVnwNdL1A=='
 
 config.database = {
-  id: 'AgroList'
+  id: 'FlowSensor'
 }
 
 config.container = {
-  id: 'Dados'
+  id: 'Items'
 }
 
 module.exports = config

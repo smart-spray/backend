@@ -1,8 +1,6 @@
-import { GuideType } from "./enums/guide.type";
-
 export class EPIEntity {
   public id: string;
-  public type: GuideType;
+  public type: string;
   public name: string;
   public description: string;
 }
