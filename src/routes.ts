@@ -2,7 +2,7 @@ import { Router } from "express";
 
 import { HealthController } from "./modules/health/health.controller";
 import ProcessGuideController from "./modules/pulverization/process.guide.controller";
-import SprayMonitorController from "./modules/spray/spray.monitor.controller";
+import SprayMonitorController from "./modules/spray/spray.controller";
 
 const healthController = new HealthController();
 const processGuide = new ProcessGuideController();

@@ -1,24 +1,20 @@
-import { IRepository } from "../../repositories/repository";
-import { SprayEntity } from "../entities/spray.entity";
+// Essa classe vai receber os dados de vazão do sensor e interpretá-los
+import { CosmosService } from "../../cosmosDB/cosmosService.js";
+import { SprayEntity } from "./spray.entity";
 
 export default class SprayService {
-  constructor(private repository: IRepository<SprayEntity>) {}
-
   public async retrieveSpray(sprayId: string): Promise<SprayEntity> {
-    const spray = await this.repository.findById(sprayId);
-
-    if (!spray) {
-      throw new Error("Spray not found");
-    }
-
-    return spray;
+    CosmosService.readDatabase();
+    return new SprayEntity();
   }
 
-  public async create(newSpray: SprayEntity): Promise<SprayEntity> {
-    return await this.repository.create(newSpray);
+  public async retrieveSprayHealth(sprayId: string): Promise<SprayEntity> {
+    CosmosService.readDatabase();
+    return new SprayEntity();
   }
 
   public async listAll(): Promise<SprayEntity[]> {
-    return await this.repository.findAll();
+    CosmosService.readDatabase();
+    return [];
   }
 }
