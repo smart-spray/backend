@@ -39,6 +39,8 @@ async function readContainer() {
     .container(containerId)
     .read()
   console.log(`Reading container:\n${containerDefinition.id}\n`)
+  const data = await client.database(databaseId).container(containerId).items.readAll().fetchAll();
+  return data;
 }
 
 module.exports = {
