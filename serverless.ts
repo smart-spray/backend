@@ -12,8 +12,9 @@ sls.functions = {
     handler: "src/handler.default",
     events: [
       { httpApi: { method: "get", path: "/health" } },
-      { httpApi: { method: "get", path: "/users" } },
-      // { httpApi: { method: "post", path: "/users" } }
+      { httpApi: { method: "get", path: "/sprays" } },
+      { httpApi: { method: "get", path: "/sprays/{id}" } },
+      { httpApi: { method: "get", path: "/sprays/health/{id}" } },
     ],
   },
 };
