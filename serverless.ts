@@ -15,6 +15,7 @@ sls.functions = {
       { httpApi: { method: "get", path: "/sprays" } },
       { httpApi: { method: "get", path: "/sprays/{id}" } },
       { httpApi: { method: "get", path: "/sprays/health/{id}" } },
+      { httpApi: { method: "get", path: "/sensorData" } },
     ],
   },
 };

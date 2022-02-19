@@ -5,21 +5,28 @@ import SprayService from "./spray.service";
 const service = new SprayService();
 
 export default class SprayMonitorController {
-  public async getSprays(response: Response): Promise<Response> {
+  public async getSprays(request: Request, response: Response) {
     try {
       const sprays = await service.listAll();
-
-      return response.status(200).json(sprays);
+      return response.status(200).json({ spray: sprays });
+      // return sprays.toString();
     } catch (err) {
       console.log(err);
       return response.status(500).json({ error: "Internal server error" });
     }
   }
 
-  public async getSprayById(
-    response: Response,
-    request: Request
-  ): Promise<Response> {
+  public async getSensorData(request: Request, response: Response) {
+    try {
+      const sprays = await service.listSensorData();
+      return response.status(200).json({ spray: sprays });
+    } catch (err) {
+      console.log(err);
+      return response.status(500).json({ error: "Internal server error" });
+    }
+  }
+
+  public async getSprayById(response: Response, request: Request) {
     try {
       const { id } = request.params;
       const spray = await service.retrieveSpray(id);
@@ -30,10 +37,7 @@ export default class SprayMonitorController {
       return response.status(500).json({ error: "Internal server error" });
     }
   }
-  public async getSprayHealth(
-    response: Response,
-    request: Request
-  ): Promise<Response> {
+  public async getSprayHealth(response: Response, request: Request) {
     try {
       const { id } = request.params;
 
