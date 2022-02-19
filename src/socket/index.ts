@@ -1,11 +1,11 @@
-import express from "express";
-import http from "http";
-import socket from "socket.io";
+// import express from "express";
+// import http from "http";
+// import socket from "socket.io";
 
-const app = express();
-app.use(express.static(`${__dirname}./frontExample`));
+// const app = express();
+// app.use(express.static(`${__dirname}./frontExample`));
 
-const PORT = process.env.PORT || 8899;
+// const PORT = process.env.PORT || 8899;
 
 // app.get("/message", (req, res) => {
 //   const message = req.query.message?.toString() || "";

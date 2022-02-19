@@ -1,5 +1,6 @@
+/* eslint-disable prettier/prettier */
 // Essa classe vai receber os dados de vazão do sensor e interpretá-los
-import { CosmosService } from "../../cosmosDB/cosmosService.js";
+import * as CosmosService from "../../cosmosDB/cosmosService.js";
 import { SprayEntity } from "./spray.entity";
 
 export default class SprayService {
@@ -14,7 +15,15 @@ export default class SprayService {
   }
 
   public async listAll(): Promise<SprayEntity[]> {
-    CosmosService.readContainer();
-    return [];
+    console.log("m=listAll()");
+    // const containerData = await CosmosService.readContainer();
+    const spray: SprayEntity = {
+      id: "12212",
+      ph: 1010,
+      isClean: true,
+      lastCleanDate: "2020-10-10",
+      nozzleStatus: "Limpo",
+    };
+    return [spray];
   }
 }
