@@ -4,5 +4,5 @@ export class PulverizationEntity {
   public duration: number;
   public weatherStatus: string;
   public userName: string;
-  public sprayMachineStatus: string;
+  public pulverizationStatusIsOk: boolean;
 }

@@ -4,20 +4,22 @@ import { PulverizationEntity } from "./pulverization.entity";
 export default class PulverizationService {
   constructor(private repository: IRepository<PulverizationEntity>) {}
 
-  public async retrieveSpray(sprayId: string): Promise<PulverizationEntity> {
-    const spray = await this.repository.findById(sprayId);
+  public async retrievePulverization(
+    pulverizationId: string
+  ): Promise<PulverizationEntity> {
+    const pulverization = await this.repository.findById(pulverizationId);
 
-    if (!spray) {
+    if (!pulverization) {
       throw new Error("Spray not found");
     }
 
-    return spray;
+    return pulverization;
   }
 
-  public async create(
-    newSpray: PulverizationEntity
+  public async savePulverization(
+    newPulverization: PulverizationEntity
   ): Promise<PulverizationEntity> {
-    return await this.repository.create(newSpray);
+    return await this.repository.create(newPulverization);
   }
 
   public async listAll(): Promise<PulverizationEntity[]> {

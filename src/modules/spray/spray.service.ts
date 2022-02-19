@@ -4,6 +4,7 @@ import * as CosmosService from "../../cosmosDB/cosmosService.js";
 import { SprayEntity } from "./spray.entity";
 
 export default class SprayService {
+  // Dados de Spray mocados para teste de rota da API
   private spray(sprayId: string): SprayEntity {
     return {
       id: sprayId,
