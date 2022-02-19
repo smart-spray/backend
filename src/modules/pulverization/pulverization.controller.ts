@@ -44,4 +44,19 @@ export default class PulverizationController {
       return response.status(500).json({ error: "Internal server error" });
     }
   }
+
+  public async sendToCloud(request: Request, response: Response) {
+    try {
+      const { message } = request.params;
+
+      await service.sendMessageToCloud(message);
+
+      return response.status(200);
+    } catch (err) {
+      console.log(err);
+      return response
+        .status(500)
+        .json({ error: "Internal server error", description: err.toString() });
+    }
+  }
 }

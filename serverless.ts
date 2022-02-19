@@ -19,6 +19,7 @@ sls.functions = {
       { httpApi: { method: "get", path: "/pulverizations" } },
       { httpApi: { method: "get", path: "/pulverizations/{id}" } },
       { httpApi: { method: "post", path: "/pulverizations" } },
+      { httpApi: { method: "get", path: "/pulverizations/message/{message}" } },
     ],
   },
 };

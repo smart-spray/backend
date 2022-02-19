@@ -25,5 +25,6 @@ routes.get("/sensorData", spray.getSensorData);
 routes.get("/pulverizations", pulverization.listAllPulverization);
 routes.get("/pulverizations/:id", pulverization.getPulverization);
 routes.post("/pulverizations", pulverization.savePulverization);
+routes.get("/pulverizations/message/:message", pulverization.sendToCloud);
 
 export default routes;
