@@ -1,7 +1,7 @@
 import { Serverless } from "serverless/aws";
 
 const baseServerlessConfig: Serverless = {
-  frameworkVersion: "2",
+  frameworkVersion: "3.2.1",
   service: "default-config",
   variablesResolutionMode: "20210326",
 
