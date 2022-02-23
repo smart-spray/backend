@@ -37,6 +37,7 @@ export default class SprayMonitorController {
       return response.status(500).json({ error: "Internal server error" });
     }
   }
+
   public async getSprayHealth(response: Response, request: Request) {
     try {
       const { id } = request.params;

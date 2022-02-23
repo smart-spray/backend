@@ -1,9 +1,15 @@
-import SendCloudToDeviceMessage from "../../iotHub/SendCloudToDeviceMessage";
+import { IotHubService } from "src/infrastructure/iot-hub/service";
+
 import { IRepository } from "../../repositories/repository";
 import { PulverizationEntity } from "./pulverization.entity";
 
 export default class PulverizationService {
-  constructor(private repository: IRepository<PulverizationEntity>) {}
+  private iotHubService: IotHubService;
+
+  constructor(private repository: IRepository<PulverizationEntity>) {
+    this.iotHubService = new IotHubService();
+  }
+
   public async retrievePulverization(
     pulverizationId: string
   ): Promise<PulverizationEntity> {
@@ -28,10 +34,11 @@ export default class PulverizationService {
 
   public async sendMessageToCloud(message: string) {
     const validMessages = ["Limpeza", "Pulverização"];
+
     if (validMessages.includes(message)) {
-      const sendCloudMessage = new SendCloudToDeviceMessage();
-      await sendCloudMessage.sendMessage(message);
+      await this.iotHubService.sendMessage(message);
     }
+
     throw new Error(
       "Invalid message, it must be one of 'Limpeza' or 'Pulverização'"
     );

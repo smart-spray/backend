@@ -1,9 +1,14 @@
-/* eslint-disable prettier/prettier */
-// Essa classe vai receber os dados de vazão do sensor e interpretá-los
-import * as CosmosService from "../../cosmosDB/cosmosService.js";
+import { CosmosService } from "src/infrastructure/cosmos/service";
+
 import { SprayEntity } from "./spray.entity";
 
 export default class SprayService {
+  private cosmosService: CosmosService;
+
+  constructor() {
+    this.cosmosService = new CosmosService();
+  }
+
   // Dados de Spray mocados para teste de rota da API
   private spray(sprayId: string): SprayEntity {
     return {
@@ -27,8 +32,8 @@ export default class SprayService {
     return [this.spray("1L")];
   }
 
-  public async listSensorData(): Promise<[]> {
-    const containerData = await CosmosService.readContainer();
-    return containerData.resources;
+  public async listSensorData(): Promise<any[]> {
+    const { resources } = await this.cosmosService.readContainer();
+    return resources;
   }
 }
