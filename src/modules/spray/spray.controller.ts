@@ -29,11 +29,10 @@ export default class SprayMonitorController {
     }
   }
 
-  public async getSprayById(response: Response, request: Request) {
+  public async getSprayById(request: Request, response: Response) {
     try {
       const { id } = request.params;
       const spray = await service.retrieveSpray(id);
-
       return response.json(spray);
     } catch (err) {
       console.log({ err });

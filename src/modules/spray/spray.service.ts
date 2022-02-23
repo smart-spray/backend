@@ -1,5 +1,4 @@
 import { CosmosService } from "src/infrastructure/cosmos/service";
-import { v4 as uuidv4 } from "uuid";
 
 import { SprayModel } from "./spray.schema";
 import { Spray } from "./spray.types";
@@ -12,7 +11,7 @@ export default class SprayService {
   }
 
   public async retrieveSpray(id: string): Promise<Spray> {
-    return await SprayModel.findOne({ id });
+    return await SprayModel.findById(id);
   }
 
   public async listAll(): Promise<Spray[]> {
@@ -20,10 +19,7 @@ export default class SprayService {
   }
 
   public async createSpray(data: Omit<Spray, "id">): Promise<Spray> {
-    const document = new SprayModel({
-      id: uuidv4(),
-      ...data,
-    });
+    const document = new SprayModel(data);
 
     return await document.save();
   }

@@ -4,7 +4,6 @@ export enum SprayStatus {
 }
 
 export interface Spray {
-  id: string;
   ph: number;
   isClean: boolean;
   lastCleanDate: Date;

@@ -7,6 +7,7 @@ import SprayController from "./modules/spray/spray.controller";
 const healthController = new HealthController();
 const spray = new SprayController();
 const pulverization = new PulverizationController();
+
 const routes = Router();
 
 routes.get("/health", healthController.getHealth);
