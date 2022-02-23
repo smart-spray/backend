@@ -1,6 +1,8 @@
 import { CosmosService } from "src/infrastructure/cosmos/service";
+import { v4 as uuidv4 } from "uuid";
 
-import { SprayEntity } from "./spray.entity";
+import { SprayModel } from "./spray.schema";
+import { Spray } from "./spray.types";
 
 export default class SprayService {
   private cosmosService: CosmosService;
@@ -9,27 +11,21 @@ export default class SprayService {
     this.cosmosService = new CosmosService();
   }
 
-  // Dados de Spray mocados para teste de rota da API
-  private spray(sprayId: string): SprayEntity {
-    return {
-      id: sprayId,
-      ph: 1010,
-      isClean: true,
-      lastCleanDate: "2020-10-10",
-      nozzleStatus: "Limpo",
-    };
+  public async retrieveSpray(id: string): Promise<Spray> {
+    return await SprayModel.findOne({ id });
   }
 
-  public async retrieveSpray(sprayId: string): Promise<SprayEntity> {
-    return this.spray(sprayId);
+  public async listAll(): Promise<Spray[]> {
+    return await SprayModel.find();
   }
 
-  public async retrieveSprayHealth(sprayId: string): Promise<SprayEntity> {
-    return this.spray(sprayId);
-  }
+  public async createSpray(data: Omit<Spray, "id">): Promise<Spray> {
+    const document = new SprayModel({
+      id: uuidv4(),
+      ...data,
+    });
 
-  public async listAll(): Promise<SprayEntity[]> {
-    return [this.spray("1L")];
+    return await document.save();
   }
 
   public async listSensorData(): Promise<any[]> {

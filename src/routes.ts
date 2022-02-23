@@ -16,7 +16,7 @@ routes.get("/health", healthController.getHealth);
  */
 routes.get("/sprays", spray.getSprays);
 routes.get("/sprays/:id", spray.getSprayById);
-routes.get("/sprays/health/:id", spray.getSprayHealth);
+routes.post("/sprays", spray.createSpray);
 routes.get("/sensorData", spray.getSensorData);
 
 /**

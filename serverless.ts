@@ -13,8 +13,8 @@ sls.functions = {
     events: [
       { httpApi: { method: "get", path: "/health" } },
       { httpApi: { method: "get", path: "/sprays" } },
+      { httpApi: { method: "post", path: "/sprays" } },
       { httpApi: { method: "get", path: "/sprays/{id}" } },
-      { httpApi: { method: "get", path: "/sprays/health/{id}" } },
       { httpApi: { method: "get", path: "/sensorData" } },
       { httpApi: { method: "get", path: "/pulverizations" } },
       { httpApi: { method: "get", path: "/pulverizations/{id}" } },
