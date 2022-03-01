@@ -1,5 +1,4 @@
-import { IotHubService } from "src/infrastructure/iot-hub/service";
-
+import { IotHubService } from "../../infrastructure/iot-hub/service";
 import { IRepository } from "../../repositories/repository";
 import { PulverizationEntity } from "./pulverization.entity";
 
