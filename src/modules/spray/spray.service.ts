@@ -1,34 +1,31 @@
-/* eslint-disable prettier/prettier */
-// Essa classe vai receber os dados de vazão do sensor e interpretá-los
-import * as CosmosService from "../../cosmosDB/cosmosService.js";
-import { SprayEntity } from "./spray.entity";
+import { CosmosService } from "src/infrastructure/cosmos/service";
+
+import { SprayModel } from "./spray.schema";
+import { Spray } from "./spray.types";
 
 export default class SprayService {
-  // Dados de Spray mocados para teste de rota da API
-  private spray(sprayId: string): SprayEntity {
-    return {
-      id: sprayId,
-      ph: 1010,
-      isClean: true,
-      lastCleanDate: "2020-10-10",
-      nozzleStatus: "Limpo",
-    };
+  private cosmosService: CosmosService;
+
+  constructor() {
+    this.cosmosService = new CosmosService();
   }
 
-  public async retrieveSpray(sprayId: string): Promise<SprayEntity> {
-    return this.spray(sprayId);
+  public async retrieveSpray(id: string): Promise<Spray> {
+    return await SprayModel.findById(id);
   }
 
-  public async retrieveSprayHealth(sprayId: string): Promise<SprayEntity> {
-    return this.spray(sprayId);
+  public async listAll(): Promise<Spray[]> {
+    return await SprayModel.find();
   }
 
-  public async listAll(): Promise<SprayEntity[]> {
-    return [this.spray("1L")];
+  public async createSpray(data: Omit<Spray, "id">): Promise<Spray> {
+    const document = new SprayModel(data);
+
+    return await document.save();
   }
 
-  public async listSensorData(): Promise<[]> {
-    const containerData = await CosmosService.readContainer();
-    return containerData.resources;
+  public async listSensorData(): Promise<any[]> {
+    const { resources } = await this.cosmosService.readContainer();
+    return resources;
   }
 }

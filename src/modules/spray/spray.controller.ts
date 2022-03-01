@@ -8,45 +8,48 @@ export default class SprayMonitorController {
   public async getSprays(request: Request, response: Response) {
     try {
       const sprays = await service.listAll();
-      return response.status(200).json({ spray: sprays });
-      // return sprays.toString();
+      return response.json(sprays);
     } catch (err) {
-      console.log(err);
-      return response.status(500).json({ error: "Internal server error" });
+      console.log({ err });
+      return response
+        .status(500)
+        .json({ error: "Could not get sprays", detail: err });
     }
   }
 
   public async getSensorData(request: Request, response: Response) {
     try {
-      const sprays = await service.listSensorData();
-      return response.status(200).json({ spray: sprays });
+      const sensorData = await service.listSensorData();
+      return response.json(sensorData);
     } catch (err) {
-      console.log(err);
-      return response.status(500).json({ error: "Internal server error" });
+      console.log({ err });
+      return response
+        .status(500)
+        .json({ error: "Could not get sensor data", detail: err });
     }
   }
 
-  public async getSprayById(response: Response, request: Request) {
+  public async getSprayById(request: Request, response: Response) {
     try {
       const { id } = request.params;
       const spray = await service.retrieveSpray(id);
-
-      return response.status(200).json(spray);
+      return response.json(spray);
     } catch (err) {
-      console.log(err);
-      return response.status(500).json({ error: "Internal server error" });
+      console.log({ err });
+      return response
+        .status(500)
+        .json({ error: `Could not get spray`, detail: err });
     }
   }
-  public async getSprayHealth(response: Response, request: Request) {
+  public async createSpray(request: Request, response: Response) {
     try {
-      const { id } = request.params;
-
-      const health = await service.retrieveSprayHealth(id);
-
-      return response.status(200).json(health);
+      const spray = await service.createSpray(request.body);
+      return response.json(spray);
     } catch (err) {
-      console.log(err);
-      return response.status(500).json({ error: "Internal server error" });
+      console.log({ err });
+      return response
+        .status(500)
+        .json({ error: "Could not create spray", detail: err });
     }
   }
 }

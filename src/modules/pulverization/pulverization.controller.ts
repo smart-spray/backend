@@ -23,9 +23,9 @@ export default class PulverizationController {
 
   public async savePulverization(request: Request, response: Response) {
     try {
-      const newpulverization: PulverizationEntity = request.body;
+      const newPulverization: PulverizationEntity = request.body;
 
-      const pulverization = await service.savePulverization(newpulverization);
+      const pulverization = await service.savePulverization(newPulverization);
 
       return response.status(200).json(pulverization);
     } catch (err) {
