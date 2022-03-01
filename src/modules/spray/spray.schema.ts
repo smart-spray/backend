@@ -5,7 +5,7 @@ import { Spray } from "./spray.types";
 const spraySchema = new Schema<Spray>({
   ph: { type: Number, required: true, default: 7 },
   isClean: { type: Boolean, required: true, default: true },
-  lastCleanDate: { type: Date, required: true },
+  lastCleanDate: { type: Date },
   nozzleStatus: { type: String, required: true },
   status: { type: String, required: true },
 });

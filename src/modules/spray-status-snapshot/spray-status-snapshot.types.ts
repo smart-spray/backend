@@ -3,10 +3,10 @@ export enum SprayStatus {
   OK = "Os bicos do pulverizador estão funcionando conforme o esperado",
 }
 
-export interface Spray {
+export interface SprayStatusSnapshot {
+  sprayId: string;
   ph: number;
-  isClean: boolean;
-  lastCleanDate?: Date;
   nozzleStatus: string;
   status: SprayStatus;
+  createdAt: Date;
 }
