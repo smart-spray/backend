@@ -135,3 +135,6 @@ apps/**/dist/
 # vs code settings
 .vscode/settings.json
 /.idea
+
+# build folder
+dist/

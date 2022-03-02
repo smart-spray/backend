@@ -9,6 +9,7 @@
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/index.ts",
     "watch-node": "nodemon dist/index.js",
     "watch-ts": "tsc -w",
+    "postinstall": "tsc",
     "heroku-prebuild": "npm install pm2 -g",
     "start": "pm2-runtime start ./dist/index.js --env production"
   },
