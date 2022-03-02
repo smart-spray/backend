@@ -4,7 +4,7 @@ import { Server as SocketServer } from "socket.io";
 import app from "../app";
 
 const httpServer = http.createServer(app);
-const io = new SocketServer(httpServer);
+const io = new SocketServer(httpServer, { cors: { origin: "*" } });
 
 io.on("connection", (socket) => {
   console.log("a user connected!", { socket });
