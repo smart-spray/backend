@@ -1,5 +1,4 @@
-import { CosmosService } from "src/infrastructure/cosmos/service";
-
+import { CosmosService } from "../../infrastructure/cosmos/service";
 import { SprayModel } from "./spray.schema";
 import { Spray } from "./spray.types";
 
@@ -15,7 +14,8 @@ export default class SprayService {
   }
 
   public async listAll(): Promise<Spray[]> {
-    return await SprayModel.find();
+    const sprays = await SprayModel.find();
+    return sprays;
   }
 
   public async createSpray(data: Omit<Spray, "id">): Promise<Spray> {
