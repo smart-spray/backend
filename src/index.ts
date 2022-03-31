@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { connectMongo } from "./infrastructure/mongo/connection";
 import { httpServer } from "./socket";
 
