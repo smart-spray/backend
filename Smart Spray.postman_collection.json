@@ -1,0 +1,355 @@
+{
+	"info": {
+		"_postman_id": "14692a88-137b-4993-bd82-4a4c9a180d0e",
+		"name": "Smart Spray",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Spray Snapshots",
+			"item": [
+				{
+					"name": "List Snapshots",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/spray-snapshots",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"spray-snapshots"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show Snapshot",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/spray-snapshots/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"spray-snapshots",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Snapshot",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"deviceId\": \"string\",\n    \"ph\": 0,\n    \"tb\": 0,\n    \"isClean\": false,\n    \"nozzleStatus\": \"ok\",\n    \"cycle\": \"pulverization\",\n    \"createdAt\": \"{{$isoTimestamp}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/spray-snapshots",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"spray-snapshots"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pulverizations",
+			"item": [
+				{
+					"name": "Pulverization Health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/pulverizations/health/:id?city=São Bernardo do Campo&state=SP",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"pulverizations",
+								"health",
+								":id"
+							],
+							"query": [
+								{
+									"key": "city",
+									"value": "São Bernardo do Campo"
+								},
+								{
+									"key": "state",
+									"value": "SP"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "limpeza-esp32"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Pulverizations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/pulverizations",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"pulverizations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show Pulverization",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/pulverizations/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"pulverizations",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Pulverization",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"deviceId\": \"string\",\n    \"timeInSeconds\": 0,\n    \"weather\": {\n        \"temperature\": 0,\n        \"windDirection\": \"string\",\n        \"windVelocity\": 0,\n        \"humidity\": 0,\n        \"condition\": \"string\",\n        \"pressure\": 0,\n        \"sensation\": \"string\"\n    },\n    \"createdAt\": \"{{$isoTimestamp}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/pulverizations",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"pulverizations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Start Pulverization",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"message\": \"Pulverização\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/pulverizations/start",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"pulverizations",
+								"start"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Decontaminations",
+			"item": [
+				{
+					"name": "List Decontaminations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/decontaminations",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"decontaminations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show Decontamination",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/decontaminations/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"decontaminations",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Decontamination",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"deviceId\": \"string\",\n    \"timeInSeconds\": 0,\n    \"createdAt\": \"{{$isoTimestamp}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/decontaminations",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"decontaminations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Start Decontamination",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"message\": \"Limpeza\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/decontaminations/start",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"decontaminations",
+								"start"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Telemetries",
+			"item": [
+				{
+					"name": "List pH and Turbidity Telemetry",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/telemetries/ph-turbidity",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"telemetries",
+								"ph-turbidity"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Flow Rate Telemetry",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/telemetries/flow-rate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"telemetries",
+								"flow-rate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
