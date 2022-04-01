@@ -19,9 +19,8 @@ jobs:
           touch .env
           echo NODE_ENV=production >> .env
           echo MONGO_URL=${{ secrets.MONGO_URL }} >> .env
-          echo COSMOS_URL=${{ secrets.COSMOS_URL }} >> .env
-          echo COSMOS_KEY=${{ secrets.COSMOS_KEY }} >> .env
           echo IOT_HUB_CONN_STR=${{ secrets.IOT_HUB_CONN_STR }} >> .env
+          echo CLIMATEMPO_API_KEY=${{ secrets.CLIMATEMPO_API_KEY }} >> .env
           cat .env
 
       - name: Set up Node.js

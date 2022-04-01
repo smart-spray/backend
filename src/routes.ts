@@ -1,40 +1,33 @@
 import { Router } from "express";
 
-import { HealthController } from "./modules/health/health.controller";
-import PulverizationController from "./modules/pulverization/pulverization.controller";
-import SprayStatusSnapshotController from "./modules/spray-status-snapshot/spray-status-snapshot.controller";
-import SprayController from "./modules/spray/spray.controller";
-
-const healthController = new HealthController();
-const spray = new SprayController();
-const sprayStatusSnapshot = new SprayStatusSnapshotController();
-const pulverization = new PulverizationController();
+import { DecontaminationController } from "./modules/decontamination/decontamination.controller";
+import { PulverizationController } from "./modules/pulverization/pulverization.controller";
+import { SpraySnapshotController } from "./modules/spray-snapshot/spray-snapshot.controller";
+import { TelemetryController } from "./modules/telemetry/telemetry.controller";
 
 const routes = Router();
 
-routes.get("/health", healthController.getHealth);
+const decontamination = new DecontaminationController();
+const pulverization = new PulverizationController();
+const spraySnapshot = new SpraySnapshotController();
+const telemetry = new TelemetryController();
 
-/**
- * spray routes
- */
-routes.get("/sprays", spray.getSprays);
-routes.get("/sprays/:id", spray.getSprayById);
-routes.post("/sprays", spray.createSpray);
-routes.get("/sensorData", spray.getSensorData);
+routes.get("/decontaminations", decontamination.list);
+routes.get("/decontaminations/:id", decontamination.show);
+routes.post("/decontaminations", decontamination.create);
+routes.post("/decontaminations/start", decontamination.start);
 
-/**
- * spray status snapshots routes
- */
-routes.get("/spray-status-snapshots", sprayStatusSnapshot.list);
-routes.get("/spray-status-snapshots/:id", sprayStatusSnapshot.show);
-routes.post("/spray-status-snapshots", sprayStatusSnapshot.create);
+routes.get("/pulverizations/health/:id", pulverization.health);
+routes.get("/pulverizations", pulverization.list);
+routes.get("/pulverizations/:id", pulverization.show);
+routes.post("/pulverizations", pulverization.create);
+routes.post("/pulverizations/start", pulverization.start);
 
-/**
- * pulverization routes
- */
-routes.get("/pulverizations", pulverization.listAllPulverization);
-routes.get("/pulverizations/:id", pulverization.getPulverization);
-routes.post("/pulverizations", pulverization.savePulverization);
-routes.get("/pulverizations/message/:message", pulverization.sendToCloud);
+routes.get("/spray-snapshots", spraySnapshot.list);
+routes.get("/spray-snapshots/:id", spraySnapshot.show);
+routes.post("/spray-snapshots", spraySnapshot.create);
+
+routes.get("/telemetries/ph-turbidity", telemetry.getPhAndTurbidity);
+routes.get("/telemetries/flow-rate", telemetry.getFlowRate);
 
 export default routes;

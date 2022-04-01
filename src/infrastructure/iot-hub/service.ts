@@ -5,7 +5,7 @@ import { iotHubConfig } from "./config";
 import { iotHubClient } from "./connection";
 
 export class IotHubService {
-  async sendMessage(msg: string) {
+  async sendMessage(msg: string): Promise<void> {
     try {
       const { message: connMessage } = await iotHubClient.open();
 
@@ -29,12 +29,13 @@ export class IotHubService {
       );
 
       console.log("Send status: ", result);
-      console.log("Send message: ", receivedMessage);
+      console.log("Sent message: ", receivedMessage);
 
-      iotHubClient.close();
+      await iotHubClient.close();
+
+      return;
     } catch (err) {
       console.log({ err });
-      return null;
     }
   }
 }
