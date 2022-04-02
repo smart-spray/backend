@@ -1,45 +1,75 @@
 import { IotHubService } from "../../infrastructure/iot-hub/service";
-import { IRepository } from "../../repositories/repository";
-import { PulverizationEntity } from "./pulverization.entity";
+import { ClimatempoService } from "../climatempo/climatempo.service";
+import { TelemetryService } from "../telemetry/telemetry.service";
+import { PulverizationModel } from "./pulverization.schema";
+import {
+  Pulverization,
+  PulverizationHealth,
+  PulverizationHealthParams,
+} from "./pulverization.types";
 
-export default class PulverizationService {
-  private iotHubService: IotHubService;
-
-  constructor(private repository: IRepository<PulverizationEntity>) {
-    this.iotHubService = new IotHubService();
+export class PulverizationService {
+  public async listAll(): Promise<Pulverization[]> {
+    return await PulverizationModel.find();
   }
 
-  public async retrievePulverization(
-    pulverizationId: string
-  ): Promise<PulverizationEntity> {
-    const pulverization = await this.repository.findById(pulverizationId);
+  public async show(id: string): Promise<Pulverization> {
+    return await PulverizationModel.findById(id);
+  }
 
-    if (!pulverization) {
-      throw new Error("Spray not found");
+  public async create(
+    data: Omit<Pulverization, "_id">
+  ): Promise<Pulverization> {
+    const document = new PulverizationModel(data);
+    return await document.save();
+  }
+
+  public async start(message: string): Promise<void> {
+    const iotHubService = new IotHubService();
+
+    const validMessage = "Pulverização";
+
+    if (message !== validMessage) {
+      throw new Error("Invalid message, it must be 'Puverização'");
     }
 
-    return pulverization;
+    await iotHubService.sendMessage(message);
   }
 
-  public async savePulverization(
-    newPulverization: PulverizationEntity
-  ): Promise<PulverizationEntity> {
-    return await this.repository.create(newPulverization);
-  }
+  public async health(
+    params: PulverizationHealthParams
+  ): Promise<PulverizationHealth> {
+    const { deviceId, city, state } = params;
 
-  public async listAll(): Promise<PulverizationEntity[]> {
-    return await this.repository.findAll();
-  }
+    const telemetryService = new TelemetryService();
+    const climatempoService = new ClimatempoService();
 
-  public async sendMessageToCloud(message: string) {
-    const validMessages = ["Limpeza", "Pulverização"];
+    // TODO: Get the most recent device given the date
+    const [phAndTurbidityTelemetry] =
+      await telemetryService.listAllPhAndTurbidity();
 
-    if (validMessages.includes(message)) {
-      await this.iotHubService.sendMessage(message);
-    }
+    const [flowRateTelemetry] = await telemetryService.listAllFlowRate();
 
-    throw new Error(
-      "Invalid message, it must be one of 'Limpeza' or 'Pulverização'"
-    );
+    const { isClean } = phAndTurbidityTelemetry;
+    // TODO: get nozzleStatus as soon as Bruno finish his part
+    // const { status: nozzleStatus } = flowRateTelemetry;
+    const nozzleStatus = "ok";
+
+    const data = await climatempoService.getWeather({ city, state });
+
+    return {
+      deviceId,
+      isClean,
+      nozzleStatus,
+      weather: {
+        temperature: data.data.temperature,
+        windDirection: data.data.wind_direction,
+        windVelocity: data.data.wind_velocity,
+        humidity: data.data.humidity,
+        condition: data.data.condition,
+        pressure: data.data.pressure,
+        sensation: data.data.sensation,
+      },
+    };
   }
 }
