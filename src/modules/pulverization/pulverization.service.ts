@@ -27,10 +27,10 @@ export class PulverizationService {
   public async start(message: string): Promise<void> {
     const iotHubService = new IotHubService();
 
-    const validMessage = "Pulverização";
+    const validMessage = "P";
 
     if (message !== validMessage) {
-      throw new Error("Invalid message, it must be 'Puverização'");
+      throw new Error("Invalid message, it must be 'P'");
     }
 
     await iotHubService.sendMessage(message);

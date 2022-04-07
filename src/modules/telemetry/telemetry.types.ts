@@ -5,6 +5,7 @@ interface RawPhAndTurbidity {
   limpeza?: boolean;
   ph?: number;
   tb?: number;
+  createdAt: string;
 }
 
 interface RawFlowRate {
@@ -16,6 +17,7 @@ interface RawFlowRate {
   sensor3?: number;
   valor?: "ok" | "nok";
   setor?: string;
+  createdAt: string;
 }
 
 export interface RawTelemetry extends RawPhAndTurbidity, RawFlowRate {}
@@ -27,6 +29,7 @@ export interface PhAndTurbidityTelemetry {
   isPulverizing: boolean;
   ph: number;
   tb: number;
+  createdAt: string;
 }
 
 export interface FlowRateTelemetry {
@@ -38,4 +41,5 @@ export interface FlowRateTelemetry {
   sensor3: number;
   status: "ok" | "nok";
   sector: string;
+  createdAt: string;
 }

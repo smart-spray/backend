@@ -7,10 +7,10 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/index.ts",
+    "build": "npx tsc",
     "watch-node": "nodemon dist/index.js",
     "watch-ts": "tsc -w",
-    "postinstall": "tsc",
-    "start": "node ./dist/index.js --env production"
+    "start": "node dist/index.js --env production"
   },
   "dependencies": {
     "@types/node": "^17.0.18",

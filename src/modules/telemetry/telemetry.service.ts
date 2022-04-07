@@ -3,7 +3,7 @@ import { PhAndTurbidityTelemetry, FlowRateTelemetry } from "./telemetry.types";
 
 export class TelemetryService {
   public async listAllPhAndTurbidity(): Promise<PhAndTurbidityTelemetry[]> {
-    const telemetries = await TelemetryModel.find();
+    const telemetries = await TelemetryModel.find().sort(["createdAt", -1]);
 
     if (!telemetries.length) return [];
 
@@ -18,6 +18,7 @@ export class TelemetryService {
             isPulverizing: telemetry.pulverizacao,
             ph: telemetry.ph,
             tb: telemetry.tb,
+            createdAt: telemetry.createdAt,
           } as PhAndTurbidityTelemetry)
       );
 
@@ -25,7 +26,7 @@ export class TelemetryService {
   }
 
   public async listAllFlowRate(): Promise<FlowRateTelemetry[]> {
-    const telemetries = await TelemetryModel.find();
+    const telemetries = await TelemetryModel.find().sort(["createdAt", -1]);
 
     if (!telemetries.length) return [];
 
@@ -42,6 +43,7 @@ export class TelemetryService {
             sensor3: telemetry.sensor3,
             status: telemetry.valor,
             sector: telemetry.setor,
+            createdAt: telemetry.createdAt,
           } as FlowRateTelemetry)
       );
 

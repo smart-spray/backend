@@ -5,7 +5,7 @@ export interface PulverizationWeather {
   humidity: number;
   condition: string;
   pressure: number;
-  sensation: string;
+  sensation: number;
 }
 
 export interface Pulverization {

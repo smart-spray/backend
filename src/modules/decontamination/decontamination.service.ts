@@ -20,10 +20,10 @@ export class DecontaminationService {
 
   public async start(message: string): Promise<void> {
     const iotHubService = new IotHubService();
-    const validMessage = "Limpeza";
+    const validMessage = "L";
 
     if (message !== validMessage) {
-      throw new Error("Invalid message, it must be 'Limpeza'");
+      throw new Error("Invalid message, it must be 'L'");
     }
 
     await iotHubService.sendMessage(message);
