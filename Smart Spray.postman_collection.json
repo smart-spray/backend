@@ -189,7 +189,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"message\": \"Pulverização\"\n}",
+							"raw": "{\n    \"message\": \"P\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -288,7 +288,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"message\": \"Limpeza\"\n}",
+							"raw": "{\n    \"message\": \"L\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
