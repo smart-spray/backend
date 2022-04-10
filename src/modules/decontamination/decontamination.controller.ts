@@ -58,7 +58,7 @@ export class DecontaminationController {
 
   public async stop(request: Request, response: Response) {
     try {
-      await service.start(request.body.message);
+      await service.stop(request.body.message);
       return response.status(200).json({
         message: "Decontamination process has been successfully stopped",
       });
