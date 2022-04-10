@@ -55,4 +55,18 @@ export class DecontaminationController {
         .json({ error: "Could not start decontamination", detail: err });
     }
   }
+
+  public async stop(request: Request, response: Response) {
+    try {
+      await service.start(request.body.message);
+      return response.status(200).json({
+        message: "Decontamination process has been successfully stopped",
+      });
+    } catch (err) {
+      console.log({ err });
+      return response
+        .status(500)
+        .json({ error: "Could not stop decontamination", detail: err });
+    }
+  }
 }

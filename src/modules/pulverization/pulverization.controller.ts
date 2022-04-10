@@ -73,4 +73,18 @@ export class PulverizationController {
         .json({ error: "Could not start pulverization", detail: err });
     }
   }
+
+  public async stop(request: Request, response: Response) {
+    try {
+      await service.start(request.body.message);
+      return response.status(200).json({
+        message: "Pulverization process has been successfully stopped",
+      });
+    } catch (err) {
+      console.log({ err });
+      return response
+        .status(500)
+        .json({ error: "Could not stop pulverization", detail: err });
+    }
+  }
 }

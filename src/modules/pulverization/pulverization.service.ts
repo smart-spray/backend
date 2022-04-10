@@ -85,4 +85,16 @@ export class PulverizationService {
       },
     };
   }
+
+  public async stop(message: string): Promise<void> {
+    const iotHubService = new IotHubService();
+
+    const validMessage = "S";
+
+    if (message !== validMessage) {
+      throw new Error("Invalid message, it must be 'S'");
+    }
+
+    await iotHubService.sendMessage(message);
+  }
 }
