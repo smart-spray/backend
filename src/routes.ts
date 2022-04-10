@@ -16,14 +16,14 @@ routes.get("/decontaminations", decontamination.list);
 routes.get("/decontaminations/:id", decontamination.show);
 routes.post("/decontaminations", decontamination.create);
 routes.post("/decontaminations/start", decontamination.start);
-routes.post("/decontaminations/stop", decontamination.stop);
+routes.put("/decontaminations/stop", decontamination.stop);
 
 routes.get("/pulverizations/health/:id", pulverization.health);
 routes.get("/pulverizations", pulverization.list);
 routes.get("/pulverizations/:id", pulverization.show);
 routes.post("/pulverizations", pulverization.create);
 routes.post("/pulverizations/start", pulverization.start);
-routes.post("/pulverizations/stop", pulverization.stop);
+routes.put("/pulverizations/stop", pulverization.stop);
 
 routes.get("/spray-snapshots", spraySnapshot.list);
 routes.get("/spray-snapshots/:id", spraySnapshot.show);
