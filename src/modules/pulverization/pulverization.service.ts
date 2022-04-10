@@ -42,7 +42,7 @@ export class PulverizationService {
     const { deviceId, city, state } = params;
 
     const telemetryService = new TelemetryService();
-    const climatempoService = new ClimatempoService();
+    // const climatempoService = new ClimatempoService();
 
     // TODO: Get the most recent device given the date
     const [phAndTurbidityTelemetry] =
@@ -50,17 +50,30 @@ export class PulverizationService {
 
     const [flowRateTelemetry] = await telemetryService.listAllFlowRate();
 
-    const { isClean } = phAndTurbidityTelemetry;
+    const { isClean, ph } = phAndTurbidityTelemetry;
     // TODO: get nozzleStatus as soon as Bruno finish his part
     // const { status: nozzleStatus } = flowRateTelemetry;
     const nozzleStatus = "ok";
 
-    const data = await climatempoService.getWeather({ city, state });
+    // const data = await climatempoService.getWeather({ city, state });
+
+    const data = {
+      data: {
+        temperature: 19,
+        wind_direction: "ESE",
+        wind_velocity: 16.2,
+        humidity: 95.1,
+        condition: "Chuva",
+        pressure: 937.8,
+        sensation: 19,
+      },
+    };
 
     return {
       deviceId,
-      isClean,
-      nozzleStatus,
+      isClean, // pH and turbidity
+      nozzleStatus, // flow rate
+      ph,
       weather: {
         temperature: data.data.temperature,
         windDirection: data.data.wind_direction,
