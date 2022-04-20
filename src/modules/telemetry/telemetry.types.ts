@@ -16,7 +16,8 @@ interface RawFlowRate {
   sensor2?: number;
   sensor3?: number;
   valor?: "ok" | "nok";
-  setor?: string;
+  setor?: string | null;
+  quantidadeObstruida: number;
   createdAt: string;
 }
 
@@ -40,6 +41,7 @@ export interface FlowRateTelemetry {
   sensor2: number;
   sensor3: number;
   status: "ok" | "nok";
-  sector: string;
+  sector: string | null;
+  quantityObstructed: number;
   createdAt: string;
 }

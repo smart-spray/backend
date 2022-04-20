@@ -1,11 +1,16 @@
 import { Message } from "azure-iot-common";
 import { v4 as uuidv4 } from "uuid";
 
-import { iotHubConfig } from "./config";
-import { iotHubClient } from "./connection";
+import { iotHubConfigOne, iotHubConfigTwo } from "./config";
+import { iotHubClientOne, iotHubClientTwo } from "./connection";
 
 export class IotHubService {
-  async sendMessage(msg: string): Promise<void> {
+  async sendMessage(msg: string, target: "one" | "two"): Promise<void> {
+    const { iotHubClient, iotHubConfig } =
+      target === "one"
+        ? { iotHubClient: iotHubClientOne, iotHubConfig: iotHubConfigOne }
+        : { iotHubClient: iotHubClientTwo, iotHubConfig: iotHubConfigTwo };
+
     try {
       const { message: connMessage } = await iotHubClient.open();
 

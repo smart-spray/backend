@@ -26,7 +26,7 @@ export class DecontaminationService {
       throw new Error("Invalid message, it must be 'L'");
     }
 
-    await iotHubService.sendMessage(message);
+    await iotHubService.sendMessage(message, "one");
   }
 
   public async stop(message: string): Promise<void> {
@@ -37,6 +37,6 @@ export class DecontaminationService {
       throw new Error("Invalid message, it must be 'S'");
     }
 
-    await iotHubService.sendMessage(message);
+    await iotHubService.sendMessage(message, "one");
   }
 }

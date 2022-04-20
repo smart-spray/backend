@@ -33,7 +33,10 @@ export class PulverizationService {
       throw new Error("Invalid message, it must be 'P'");
     }
 
-    await iotHubService.sendMessage(message);
+    await Promise.all([
+      await iotHubService.sendMessage(message, "one"),
+      await iotHubService.sendMessage(message, "two"),
+    ]);
   }
 
   public async health(
@@ -44,19 +47,15 @@ export class PulverizationService {
     const telemetryService = new TelemetryService();
     // const climatempoService = new ClimatempoService();
 
-    // TODO: Get the most recent device given the date
     const [phAndTurbidityTelemetry] =
       await telemetryService.listAllPhAndTurbidity();
 
     const [flowRateTelemetry] = await telemetryService.listAllFlowRate();
 
     const { isClean, ph } = phAndTurbidityTelemetry;
-    // TODO: get nozzleStatus as soon as Bruno finish his part
-    // const { status: nozzleStatus } = flowRateTelemetry;
-    const nozzleStatus = "ok";
+    const { status: nozzleStatus } = flowRateTelemetry;
 
     // const data = await climatempoService.getWeather({ city, state });
-
     const data = {
       data: {
         temperature: 19,
@@ -95,6 +94,9 @@ export class PulverizationService {
       throw new Error("Invalid message, it must be 'S'");
     }
 
-    await iotHubService.sendMessage(message);
+    await Promise.all([
+      await iotHubService.sendMessage(message, "one"),
+      await iotHubService.sendMessage(message, "two"),
+    ]);
   }
 }

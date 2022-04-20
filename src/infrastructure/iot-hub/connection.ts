@@ -1,7 +1,11 @@
 import { Client } from "azure-iothub";
 
-import { iotHubConfig } from "./config";
+import { iotHubConfigOne, iotHubConfigTwo } from "./config";
 
-export const iotHubClient = Client.fromConnectionString(
-  iotHubConfig.connString
+export const iotHubClientOne = Client.fromConnectionString(
+  iotHubConfigOne.connString
+);
+
+export const iotHubClientTwo = Client.fromConnectionString(
+  iotHubConfigTwo.connString
 );

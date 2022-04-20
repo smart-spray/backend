@@ -15,6 +15,7 @@ const telemetrySchema = new Schema<RawTelemetry>({
   sensor3: { type: Number, required: false },
   valor: { type: String, required: false },
   setor: { type: String, required: false },
+  quantidadeObstruida: { type: Number, required: false },
 
   createdAt: { type: String, required: true },
 });

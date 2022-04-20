@@ -43,6 +43,7 @@ export class TelemetryService {
             sensor3: telemetry.sensor3,
             status: telemetry.valor,
             sector: telemetry.setor,
+            quantityObstructed: telemetry.quantidadeObstruida,
             createdAt: telemetry.createdAt,
           } as FlowRateTelemetry)
       );
