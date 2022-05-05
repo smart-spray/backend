@@ -1,6 +1,4 @@
 
-<iframe style="border:none" width="800" height="450" src="https://whimsical.com/embed/Vvn5BDP7Kf16VGjXbQRaiF"></iframe>
-
 # API SmartSpary
 <img src="img\logoSmartSpray.png" alt="drawing" style="width:100px;"/>
 
