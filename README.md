@@ -2,10 +2,16 @@
 # API SmartSpary
 <img src="img\logoSmartSpray.png" alt="drawing" style="width:100px;"/>
 
+---
+
+>  \* (campo obrigatório)
+>
+
+  
 *******
 ## Conteúdo
  1. [Pulverização](#Pulverização)
- 2. [Descontaminação](#Descontaminação)
+ 2. [Descontaminação](#Descontaminacao)
  3. [Spray Snapshots](#SpraySnapshots)
  4. [Telemetria](#Telemetria)
 
@@ -17,21 +23,67 @@
 
 Módulos de histórico e criação de um registro de uma pulverização.
 
-> * (campo obrigatório)
->
+|Output|	Tipo|	Descrição|
+| ------------- | ------------- |------------- |
+|_id|	string|	Identificação do registro.|
+|deviceId|	string|	Identificação do dispositivo.|
+|timeInSeconds|	number|	Duração da pulverização em segundos.|
+|weather|	object|	Dados do clima.|
+|temperature|	number|	Temperatura do clima.|
+|windDirection	|string	|Direção do vento .|
+|windVelocity|	number|	Velocidade do vento.|
+|humidity|	number|	Umidade do ar.|
+|condition|	string|	Usuário que realizou a pulverização.|
+|pressure|	number|	Pressão atmosférica.|
+|sensation|	string|	Sensação climática.|
+|createdAt|	string|	Data da execução do processo.|
 
-## GET | Lista todas as pulverizações
+---
+## GET | Pulverization Health
+
+Descrição: Retorna os dados da ultima leitura do status do pulverizador e clima.
+
+|Parâmetros|Descrição|
+|------|------|
+|id*|Identificação do device id.|
+|city*|Nome da cidade para consulta do clima.|
+|state*|Sigla do estado para consulta do clima.|
+
+```
+/pulverizations/health/:id?city=São Bernardo do Campo&state=SP
+```
+
+### Payload 
+> output
+> 
+> Status - 200
+> ```
+> {
+>      "deviceId": "string",
+>      "isClean": false,
+>      "nozzleStatus": "ok",
+>      "ph": 21.440001,,
+>      "weather": {
+>          "temperature": 0,
+>          "windDirection": "string",
+>          "windVelocity": 0,
+>          "humidity": 0,
+>          "condition": "string",
+>          "pressure": 0,
+>          "sensation": "string"
+>      }
+> }
+> ```
+
+---
+
+## GET | List Pulverizations
 
 Descrição: Retorna uma lista com todas as pulverizações realizadas anteriormente.
 
-|Output|	Tipo|	Descrição|
-| ------------- | ------------- |------------- |
-|id| string|Identificação da pulverização.|
-|date| string|	Data de realização da pulverização.|
-|duration|	number|	Duração da pulverização em segundos.
-|weatherStatus|	string|	Status do Clima durante a pulverização.|
-|user|	string|	Usuário que realizou a pulverização.|
-|sprayStatusIsOk|	boolean|	Informa se a pulverização foi realizada com status do pulverizador "Ok" .|
+```
+/pulverizations
+```
 
 ### Payload - output
 
@@ -40,55 +92,60 @@ Status - 200
 > ```
 > [
 >     {
->         "id": "string",
->         "date": "Date",
->         "duration": 999,
->         "weatherStatus": "string",
->         "userName": "string",
->         "sprayStatusIsOk": true
+>         "deviceId": "string",
+>         "timeInSeconds": 0,
+>         "weather": {
+>             "temperature": 0,
+>             "windDirection": "string",
+>             "windVelocity": 0,
+>             "humidity": 0,
+>             "condition": "string",
+>             "pressure": 0,
+>             "sensation": "string"
+>         },
+>         "createdAt": "2022-05-05T01:28:20.760Z"
 >     }
 > ]
 > ```
 
 ---
-## GET | Pulverização por ID
+## GET | Show Pulverizations
 
 Descrição: Retorna os dados de uma pulverizações realizada anteriormente pelo ID da pulverização.
 
-Parâmetros	Descrição
-
-id*	Identificação da pulverização.
+|Parâmetros|Descrição|
+|------|------|
+|id*|Identificação da pulverização.|
 
 ```
-/pulverizations/{id}
+/pulverizations/:id
 ```
 
-|Output|	Tipo|	Descrição|
-| ------------- | ------------- |------------- |
-|id	|string	|Identificação da pulverização.|
-|date|	string|	Data de realização da pulverização.|
-|duration|	number|	Duração da pulverização em segundos.|
-|weatherStatus|	string|	Status do Clima durante a pulverização.|
-|user	|string	|Usuário que realizou a pulverização.|
-|sprayStatusIsOk	|boolean	|Informa se a pulverização foi realizada com status do pulverizador "Ok" .|
-
-### Payload - output
-
-Status - 200
-
+### Payload 
+> output
+> 
+> Status - 200
 > ```
 > {
->     "id": "string",
->     "date": "Date",
->     "duration": 999,
->     "weatherStatus": "string",
->     "userName": "string",
->     "sprayStatusIsOk": true
+>      "deviceId": "string",
+>      "timeInSeconds": 0,
+>      "weather": {
+>          "temperature": 0,
+>          "windDirection": "string",
+>          "windVelocity": 0,
+>          "humidity": 0,
+>          "condition": "string",
+>          "pressure": 0,
+>          "sensation": "string"
+>      },
+>      "createdAt": "2022-05-05T02:37:08.708Z",
+>      "_id": "627338508df9bb2f9d256404",
+>      "__v": 0
 > }
 > ```
 
 ---
-## POST | Pulverização
+## POST | Create Pulverization
 
 Descrição: Salva os dados de uma pulverização realizada.
 
@@ -98,11 +155,17 @@ Descrição: Salva os dados de uma pulverização realizada.
 
 |Input|	Tipo|	Descrição|
 | ------------- | ------------- |------------- |
-|date*|	string|	Data de realização da pulverização.|
-|durativo*|	number|	Duração da pulverização em segundos.|
-|weatherStatus|	string|	Status do Clima durante a pulverização.|
-|user*|	string|	Usuário que realizou a pulverização.|
-|sprayStatusIsOk*	|boolean	|Informa se a pulverização foi realizada com status do pulverizador "Ok" .|
+|deviceId|	string|	Identificação do dispositivo.|
+|timeInSeconds|	number|	Duração da pulverização em segundos.|
+|weather|	object|	Dados do clima.|
+|temperature|	number|	Temperatura do clima.|
+|windDirection	|string	|Direção do vento .|
+|windVelocity|	number|	Velocidade do vento.|
+|humidity|	number|	Umidade do ar.|
+|condition|	string|	Usuário que realizou a pulverização.|
+|pressure|	number|	Pressão atmosférica.|
+|sensation|	string|	Sensação climática.|
+|createdAt|	string|	Data da execução do processo.|
 
 ### Payload 
 
@@ -110,11 +173,18 @@ Descrição: Salva os dados de uma pulverização realizada.
 >
 > ```
 > {
->     "date": "Date",
->     "duration": 999,
->     "weatherStatus": "string",
->     "userName": "string",
->     "sprayStatusIsOk": true
+>     "deviceId": "string",
+>     "timeInSeconds": 0,
+>     "weather": {
+>         "temperature": 0,
+>         "windDirection": "string",
+>         "windVelocity": 0,
+>         "humidity": 0,
+>         "condition": "string",
+>         "pressure": 0,
+>         "sensation": "string"
+>     },
+>     "createdAt": "2022-05-05T01:28:20.760Z"
 > }
 > ```
 > ### output
@@ -123,37 +193,135 @@ Descrição: Salva os dados de uma pulverização realizada.
 >
 > ```
 > {
->     "id": "string",
->     "date": "Date",
->     "duration": 999,
->     "weatherStatus": "string",
->     "userName": "string",
->     "sprayStatusIsOk": true
+>      "deviceId": "string",
+>      "timeInSeconds": 0,
+>      "weather": {
+>          "temperature": 0,
+>          "windDirection": "string",
+>          "windVelocity": 0,
+>          "humidity": 0,
+>          "condition": "string",
+>          "pressure": 0,
+>          "sensation": "string"
+>      },
+>      "createdAt": "2022-05-05T02:37:08.708Z",
+>      "_id": "627338508df9bb2f9d256404",
+>      "__v": 0
 > }
 > ```
 
 ---
-## GET | Enviar Mensagem
+## POST | Start Pulverization
 
-Descrição: Envia mensagem de comando para o HubIoT.
+Descrição: Rota que envia o comando para o dispositivo iniciar a pulverização.
 
-|Parâmetros	|Descrição	|Valores aceitos|
-| ------------- | ------------- |------------- |
-|message*	|Mensagem a ser enviada para a nuvem. |Pulverização, Limpeza.|
+```
+/pulverizations/start
+```
+
+### Payload 
+> ### output
+>
+> Status - 200
+>
+> ```
+> {
+>      "message": "Pulverization process has been successfully started"
+> }
+> ```
 
 ----
 ----
-<div id='Descontaminação'/> 
+<div id='Descontaminacao'/> 
 
 # Descontaminação
 
-Módulos de histórico e criação de um registro de uma pulverização.
+Módulo de controle, histórico e criação do registro de uma descontaminação.
 
-> * (campo obrigatório)
+|Output|	Tipo|	Descrição|
+| ------------- | ------------- |------------- |
+|_id|	string|	Identificação do registro.|
+|deviceId|	string|	Identificação do dispositivo.|
+|timeInSeconds|	number|	Duração da do processo de descontaminação em segundos.|
+|createdAt|	string|	Data da realização do processo.|
 
-## POST | Descontaminação
+## GET | List Decontaminations
 
-Descrição: Salva os dados de uma pulverização realizada.
+Descrição: lista os dados do processo de descontaminação salvos.
+
+```
+/decontaminations
+```
+
+### Payload 
+> ### output
+>
+> Status - 200
+>
+> ```
+> [
+>      {
+>           "_id": "624709422a745a7480fc4e56",
+>           "deviceId": "limpeza-esp32",
+>           "timeInSeconds": 300,
+>           "createdAt": "2022-04-01T14:16:34.262Z",
+>           "__v": 0
+>      }
+> ]
+
+---
+## GET | Show Decontamination
+
+Descrição: Retorna da dados de uma descontaminação específica.
+
+|Parâmetros|Descrição|
+|------|------|
+|id*|Identificação da descontaminação.|
+
+```
+/decontaminations/:id
+```
+
+### Payload 
+> ### output
+>
+> Status - 200
+>
+> ```
+> {
+>      "_id": "624709422a745a7480fc4e56",
+>      "deviceId": "limpeza-esp32",
+>      "timeInSeconds": 300,
+>      "createdAt": "2022-04-01T14:16:34.262Z",
+>       "__v": 0
+> }
+> ```
+
+---
+
+## POST | Stard Decontamination
+
+Descrição: Rota que envia o comando para o dispositivo iniciar a descontaminação.
+
+```
+/decontaminations/start
+```
+
+### Payload 
+> ### output
+>
+> Status - 200
+>
+> ```
+> {
+>      "message": "Decontamination process has been successfully started"
+> }
+> ```
+---
+
+## POST | Create Decontamination
+
+Descrição: Salva os dados de uma descontaminação (limpeza) realizada.
 
 ```
 /decontaminations
@@ -161,9 +329,9 @@ Descrição: Salva os dados de uma pulverização realizada.
 
 |Input|	Tipo|	Descrição|
 | ------------- | ------------- |------------- |
-|deviceId|	string|	Data de realização da pulverização.|
-|timeInSeconds|	number|	Duração da pulverização em segundos.|
-|createdAt|	string|	Status do Clima durante a pulverização.|
+|deviceId|	string|	Identificação do dispositivo.|
+|timeInSeconds|	number|	Duração da do processo de descontaminação em segundos.|
+|createdAt|	string|	Data da realização do processo.|
 
 ### Payload 
 
@@ -196,28 +364,96 @@ Descrição: Salva os dados de uma pulverização realizada.
 <div id='SpraySnapshots'/> 
 
 # Spray Snapshots
-Módulos de histórico e criação de um registro de uma pulverização.
+Módulo de histórico e criação de um registro de um processo (limpeza ou pulverização).
 
-> * (campo obrigatório)
+|Output|	Tipo|	Descrição|
+| ------------- | ------------- |------------- |
+|_id	|string	|Identificação da leitura.|
+|deviceId|	string|	Identificação do dispositivo que realizou a leitura.|
+|isClean|	boolean|	Informa de o equipamento está limpo.|
+|cycle|	string|	Processo executado.|
+|ph	|number	|Leitura do pH.|
+|tb	|number	|Leitura da turbidez .|
+|createdAt|string|Data da leitura|
 
+## GET | List Snapshots
 
-## POST | Spray Snapshots
-
-Descrição: Salva os dados de uma pulverização realizada.
+Descrição: lista os snapshots salvos.
 
 ```
 /spray-snapshots
 ```
 
+### Payload 
+> ### output
+>
+> Status - 200
+>
+> ```
+> [
+>      {
+>           "deviceId": "string",
+>           "ph": 0,
+>           "tb": 0,
+>           "isClean": false,
+>           "nozzleStatus": "ok",
+>           "cycle": "pulverization",
+>           "createdAt": "2022-05-05T01:28:20.760Z",
+>           "_id": "627328308df9bb2f9d256400",
+>           "__v": 0
+>      }
+> ]
+
+---
+## GET | Show Snapshot
+
+Descrição: Retorna da dados de um snapshot específico.
+
+|Parâmetros|Descrição|
+|------|------|
+|id*|Identificação do snapshot.|
+
+```
+/spray-snapshots/:id
+```
+
+### Payload 
+> ### output
+>
+> Status - 200
+>
+> ```
+> {
+>      "deviceId": "string",
+>      "ph": 0,
+>      "tb": 0,
+>      "isClean": false,
+>      "nozzleStatus": "ok",
+>      "cycle": "pulverization",
+>      "createdAt": "2022-05-05T01:28:20.760Z",
+>      "_id": "627328308df9bb2f9d256400",
+>      "__v": 0
+> }
+> ``
+
+---
+## POST | Create Snapshot
+
+Descrição: Salva os dados de uma pulverização realizada.
+
+```
+/spray-snapshots
+````
+
 |Input|	Tipo|	Descrição|
 | ------------- | ------------- |------------- |
-|deviceId|	string|	Data de realização da pulverização.|
-|ph*|	number|	Duração da pulverização em segundos.|
-|tb|	string|	Status do Clima durante a pulverização.|
-|isClean|	string|	Usuário que realizou a pulverização.|
-|nozzleStatus	|boolean	|Informa se a pulverização foi realizada com status do pulverizador "Ok" .|
-|cycle|	string|	Status do Clima durante a pulverização.|
-|createdAt|	string|	Status do Clima durante a pulverização.|
+|deviceId|	string|	Identificador do dispositivo.|
+|ph	|number	|Leitura do pH.|
+|tb	|number	|Leitura da turbidez .|
+|isClean|	boolean|	Informa se está limpo.|
+|nozzleStatus	|boolean	| Informa o status dos bicos do pulverizador.|
+|cycle|	string|	Processo executado.|
+|createdAt|	string|	Data da execução do processo.|
 
 ### Payload 
 
@@ -258,8 +494,87 @@ Descrição: Salva os dados de uma pulverização realizada.
 
 # Telemetria
 
-Módulos de histórico e criação de um registro de uma pulverização.
-
-> * (campo obrigatório)
+Módulos de consulta aos dados dos sensores durante os processos.
 
 
+## GET | Lista pH e Turbidez
+
+Descrição: Retorna uma lista das leituras de pH e durbidez durante os processos.
+
+
+```
+/telemetries/ph-turbidity
+```
+
+|Output|	Tipo|	Descrição|
+| ------------- | ------------- |------------- |
+|_id	|string	|Identificação da leitura.|
+|deviceId|	string|	Identificação do dispositivo que realizou a leitura.|
+|isClean|	boolean|	Informa de o equipamento está limpo.|
+|isPulverizing|	boolean|	Status do processo de pulverização.|
+|ph	|number	|Leitura do pH.|
+|tb	|number	|Leitura da turbidez .|
+|createdAt|string|Data da leitura|
+
+
+> ### output
+>
+> Status - 200
+>
+> ```
+> [
+>     {
+>        "_id": "626de2590475a6bc66d67461",
+>        "deviceId": "P01D01",
+>        "isClean": false,
+>        "isPulverizing": true,
+>        "ph": 21.440001,
+>        "tb": 3000,
+>        "createdAt": "2022-05-01T01:28:57.234Z"
+>     }
+> ]
+> ```
+
+----
+## GET | Lista Telemetria da Vazão
+
+Descrição: Retorna uma lista das leituras de pH e durbidez durante os processos.
+
+
+```
+/telemetries/flow-rate
+```
+
+|Output|	Tipo|	Descrição|
+| ------------- | ------------- |------------- |
+|_id	|string	|Identificação da leitura.|
+|deviceId |string |	Identificação do dispositivo que realizou a leitura.|
+|isPulverizing |boolean |	Status do processo de pulverização.|
+|sensor1 |number|Leitura no sensor 1.|
+|sensor2 |number|Leitura no sensor 2.|
+|sensor3 |number|Leitura no sensor 3|
+|sector |string|Setor da leitura.|
+|quantityObstructed	|number	|Quantidade de bicos obstruidos.|
+|createdAt |string |Data da leitura|
+
+
+> ### output
+>
+> Status - 200
+>
+> ```
+> [
+>     {
+>        "_id": "62609d27ffbd2a364aace7ce",
+>        "deviceId": "P01D02",
+>        "isPulverizing": true,
+>        "sensor1": 2.86,
+>        "sensor2": 0.36,
+>        "sensor3": 2.5,
+>        "status": "ok",
+>        "sector": "null",
+>        "quantityObstructed": 0,
+>        "createdAt": "2022-05-01T01:28:57.234Z"
+>     }
+> ]
+> ```
