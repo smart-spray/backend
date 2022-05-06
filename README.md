@@ -165,7 +165,7 @@ Descrição: Salva os dados de uma pulverização realizada.
 ```
 
 |Input|	Tipo|	Descrição|
-| ------ | ------ ------ |
+| ------ | ------ |------ |
 |deviceId|	string|	Identificação do dispositivo.|
 |timeInSeconds|	number|	Duração da pulverização em segundos.|
 |weather|	object|	Dados do clima.|
