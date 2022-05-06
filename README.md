@@ -250,7 +250,7 @@ Descrição: Rota que envia o comando para o dispositivo iniciar a pulverizaçã
 Módulo de controle, histórico e criação do registro de uma descontaminação.
 
 |Output|	Tipo|	Descrição|
-| ------ | ------ ------ |
+| ------ | ------ |------ |
 |_id|	string|	Identificação do registro.|
 |deviceId|	string|	Identificação do dispositivo.|
 |timeInSeconds|	number|	Duração da do processo de descontaminação em segundos.|
@@ -339,7 +339,7 @@ Descrição: Salva os dados de uma descontaminação (limpeza) realizada.
 ```
 
 |Input|	Tipo|	Descrição|
-| ------ | ------ ------ |
+| ------ | ------ |------ |
 |deviceId|	string|	Identificação do dispositivo.|
 |timeInSeconds|	number|	Duração da do processo de descontaminação em segundos.|
 |createdAt|	string|	Data da realização do processo.|
@@ -378,7 +378,7 @@ Descrição: Salva os dados de uma descontaminação (limpeza) realizada.
 Módulo de histórico e criação de um registro de um processo (limpeza ou pulverização).
 
 |Output|	Tipo|	Descrição|
-| ------ | ------ ------ |
+| ------ | ------ |------ |
 |_id	|string	|Identificação da leitura.|
 |deviceId|	string|	Identificação do dispositivo que realizou a leitura.|
 |isClean|	boolean|	Informa de o equipamento está limpo.|
@@ -457,7 +457,7 @@ Descrição: Salva os dados de uma pulverização realizada.
 ````
 
 |Input|	Tipo|	Descrição|
-| ------ | ------ ------ |
+| ------ | ------| ------ |
 |deviceId|	string|	Identificador do dispositivo.|
 |ph	|number	|Leitura do pH.|
 |tb	|number	|Leitura da turbidez .|
@@ -518,7 +518,7 @@ Descrição: Retorna uma lista das leituras de pH e durbidez durante os processo
 ```
 
 |Output|	Tipo|	Descrição|
-| ------ | ------ ------ |
+| ------ | ------ |------ |
 |_id	|string	|Identificação da leitura.|
 |deviceId|	string|	Identificação do dispositivo que realizou a leitura.|
 |isClean|	boolean|	Informa de o equipamento está limpo.|
