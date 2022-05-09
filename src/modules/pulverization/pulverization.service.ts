@@ -10,7 +10,7 @@ import {
 
 export class PulverizationService {
   public async listAll(): Promise<Pulverization[]> {
-    return await PulverizationModel.find();
+    return await PulverizationModel.find().sort([["createdAt", -1]]);
   }
 
   public async show(id: string): Promise<Pulverization> {

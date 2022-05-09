@@ -4,7 +4,7 @@ import { Decontamination } from "./decontamination.types";
 
 export class DecontaminationService {
   public async listAll(): Promise<Decontamination[]> {
-    return await DecontaminationModel.find();
+    return await DecontaminationModel.find().sort([["createdAt", -1]]);
   }
 
   public async show(id: string): Promise<Decontamination> {
