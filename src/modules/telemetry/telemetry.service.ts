@@ -31,7 +31,7 @@ export class TelemetryService {
     if (!telemetries.length) return [];
 
     const flowRateTelemetries: FlowRateTelemetry[] = telemetries
-      .filter((telemetry) => !!telemetry.sensor1)
+      .filter((telemetry) => !!telemetry.valor)
       .map(
         (telemetry) =>
           ({
