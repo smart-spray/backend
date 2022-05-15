@@ -50,6 +50,8 @@ export class PulverizationService {
     const [phAndTurbidityTelemetry] =
       await telemetryService.listAllPhAndTurbidity();
 
+    console.log({ phAndTurbidityTelemetry });
+
     const [flowRateTelemetry] = await telemetryService.listAllFlowRate();
 
     const { isClean, ph } = phAndTurbidityTelemetry;

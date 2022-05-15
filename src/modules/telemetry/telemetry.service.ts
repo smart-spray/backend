@@ -8,7 +8,7 @@ export class TelemetryService {
     if (!telemetries.length) return [];
 
     const phAndTurbidityTelemetries: PhAndTurbidityTelemetry[] = telemetries
-      .filter((telemetry) => !telemetry.sensor1)
+      .filter((telemetry) => !telemetry.valor)
       .map(
         (telemetry) =>
           ({
