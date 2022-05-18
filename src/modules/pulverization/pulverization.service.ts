@@ -123,7 +123,8 @@ export class PulverizationService {
     windVelocity,
     humidity,
   }: PulverizationWeather): string {
-    let errors = "Cuidado! Existem riscos ao efetuar a pulverização em ";
+    let errors =
+      "Cuidado! Você está prestes a iniciar a pulverização em condições de ";
     let haveErrors = false;
 
     if (temperature < 10) {
