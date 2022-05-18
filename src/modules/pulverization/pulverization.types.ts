@@ -28,4 +28,5 @@ export interface PulverizationHealth {
   nozzleStatus: "ok" | "nok";
   ph: number;
   weather: PulverizationWeather;
+  climateErrors: string;
 }

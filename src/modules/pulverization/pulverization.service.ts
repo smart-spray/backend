@@ -6,6 +6,7 @@ import {
   Pulverization,
   PulverizationHealth,
   PulverizationHealthParams,
+  PulverizationWeather,
 } from "./pulverization.types";
 
 export class PulverizationService {
@@ -60,7 +61,7 @@ export class PulverizationService {
     // const data = await climatempoService.getWeather({ city, state });
     const data = {
       data: {
-        temperature: 19,
+        temperature: 32,
         wind_direction: "ESE",
         wind_velocity: 16.2,
         humidity: 95.1,
@@ -70,20 +71,35 @@ export class PulverizationService {
       },
     };
 
+    const {
+      temperature,
+      wind_direction: windDirection,
+      wind_velocity: windVelocity,
+      humidity,
+      condition,
+      pressure,
+      sensation,
+    } = data.data;
+
+    const weather = {
+      temperature,
+      windDirection,
+      windVelocity,
+      humidity,
+      condition,
+      pressure,
+      sensation,
+    };
+
+    const climateErrors = this.healthValidations(weather);
+
     return {
       deviceId,
       isClean, // pH and turbidity
       nozzleStatus, // flow rate
       ph,
-      weather: {
-        temperature: data.data.temperature,
-        windDirection: data.data.wind_direction,
-        windVelocity: data.data.wind_velocity,
-        humidity: data.data.humidity,
-        condition: data.data.condition,
-        pressure: data.data.pressure,
-        sensation: data.data.sensation,
-      },
+      weather,
+      climateErrors,
     };
   }
 
@@ -100,5 +116,36 @@ export class PulverizationService {
       await iotHubService.sendMessage(message, "one"),
       await iotHubService.sendMessage(message, "two"),
     ]);
+  }
+
+  private healthValidations({
+    temperature,
+    windVelocity,
+    humidity,
+  }: PulverizationWeather): string {
+    let errors = "Cuidado! Existem riscos ao efetuar a pulverização em ";
+    let haveErrors = false;
+
+    if (temperature < 10) {
+      errors += "baixa temperatura, ";
+      haveErrors = true;
+    }
+
+    if (temperature > 30) {
+      errors += "alta temperatura, ";
+      haveErrors = true;
+    }
+
+    if (windVelocity > 10) {
+      errors += "alta velocidade do vento, ";
+      haveErrors = true;
+    }
+
+    if (humidity < 55) {
+      errors += " baixa umidade do ar, ";
+      haveErrors = true;
+    }
+
+    return haveErrors ? errors.substr(0, errors.length - 2) : "";
   }
 }
