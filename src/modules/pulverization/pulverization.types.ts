@@ -29,4 +29,5 @@ export interface PulverizationHealth {
   ph: number;
   weather: PulverizationWeather;
   climateErrors: string;
+  createdAt: Date;
 }

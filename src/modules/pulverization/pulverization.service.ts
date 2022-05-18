@@ -55,7 +55,7 @@ export class PulverizationService {
 
     const [flowRateTelemetry] = await telemetryService.listAllFlowRate();
 
-    const { isClean, ph } = phAndTurbidityTelemetry;
+    const { isClean, ph, createdAt } = phAndTurbidityTelemetry;
     const { status: nozzleStatus } = flowRateTelemetry;
 
     // const data = await climatempoService.getWeather({ city, state });
@@ -100,6 +100,7 @@ export class PulverizationService {
       ph,
       weather,
       climateErrors,
+      createdAt: new Date(createdAt),
     };
   }
 
